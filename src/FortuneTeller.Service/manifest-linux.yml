@@ -2,7 +2,9 @@
 applications:
 - name: fortune-service1
   random-route: true
-  buildpack: dotnet_core_buildpack  
+  buildpack: dotnet_core_buildpack 
+  services:
+      - config-server 
   env:
     ASPNETCORE_ENVIRONMENT: Production
     

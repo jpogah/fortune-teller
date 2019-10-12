@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
+using Steeltoe.Extensions.Configuration.ConfigServer;
 using Steeltoe.Extensions.Logging;
 using System.IO;
 
@@ -20,7 +21,7 @@ namespace FortuneTeller.UI
 
             var builder = WebHost.CreateDefaultBuilder(args)
                   .UseDefaultServiceProvider(configure => configure.ValidateScopes = false)
-                  .UseCloudFoundryHosting() //Enable listening on a Env provided port
+                 // .UseCloudFoundryHosting() //Enable listening on a Env provided port
                   .AddCloudFoundry() //Add cloudfoundry environment variables as a configuration source
                .ConfigureAppConfiguration((hostingContext, config) =>
                {
@@ -28,7 +29,7 @@ namespace FortuneTeller.UI
 
                    config
                        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                       .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
+                       .AddConfigServer()
                        .AddEnvironmentVariables();
 
                    if (args != null)

@@ -3,6 +3,8 @@ applications:
 - name: fortune-ui1
   random-route: true
   buildpack: dotnet_core_buildpack  
+  services:
+      - config-server
   env:
     ASPNETCORE_ENVIRONMENT: Production
     

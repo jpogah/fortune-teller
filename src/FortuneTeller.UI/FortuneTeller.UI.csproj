@@ -13,6 +13,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.3" />
     <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="2.2.1" />
     <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="2.2.0" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.ConfigServerCore" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +34,7 @@
     <Content Remove="appsettings %28another copy%29.Development.json" />
     <Content Remove="appsettings %28copy%29.Development.json" />
     <Content Remove="appsettings %28copy%29.json" />
+    <Content Remove="publish\publish\wwwroot\lib\bootstrap\.bower.json" />
   </ItemGroup>
   <ItemGroup>
     <None Update="manifest-linux.yml">

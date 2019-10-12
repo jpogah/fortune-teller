@@ -5,9 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Steeltoe.Extensions.Logging;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
-using System.IO;
 using System.Threading.Tasks;
 using FortuneTeller.Service.Models;
+using Steeltoe.Extensions.Configuration.ConfigServer;
 
 namespace FortuneTeller.Service
 {
@@ -30,8 +30,22 @@ namespace FortuneTeller.Service
 
             var builder = WebHost.CreateDefaultBuilder(args)
                  .UseDefaultServiceProvider(configure => configure.ValidateScopes = false)
-                 .UseCloudFoundryHosting() //Enable listening on a Env provided port
+                // .UseCloudFoundryHosting() //Enable listening on a Env provided port
                  .AddCloudFoundry() //Add cloudfoundry environment variables as a configuration source
+                 .ConfigureAppConfiguration((hostingContext, config) =>
+                 {
+                     var env = hostingContext.HostingEnvironment;
+
+                     config
+                         .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                         .AddEnvironmentVariables();
+
+                     if (args != null)
+                     {
+                         config.AddCommandLine(args);
+                     }
+                 })
+                 .AddConfigServer()
                  .UseStartup<Startup>();
             builder.ConfigureLogging((hostingContext, loggingBuilder) =>
             {
