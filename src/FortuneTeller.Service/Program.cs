@@ -13,16 +13,9 @@ namespace FortuneTeller.Service
 {
     public class Program
     {
-        public static async Task Main(string[] args)
+        public static void  Main(string[] args)
         {
-            var host = await Task.FromResult(CreateWebHostBuilder(args).Build());
-
-            using (var scope = host.Services.CreateScope())
-            {
-                await SampleData.InitializeFortunesAsync(scope.ServiceProvider);
-            }
-
-            host.Run();
+            CreateWebHostBuilder(args).Build().Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args)
@@ -30,7 +23,7 @@ namespace FortuneTeller.Service
 
             var builder = WebHost.CreateDefaultBuilder(args)
                  .UseDefaultServiceProvider(configure => configure.ValidateScopes = false)
-                // .UseCloudFoundryHosting() //Enable listening on a Env provided port
+                //.UseCloudFoundryHosting() //Enable listening on a Env provided port
                  .AddCloudFoundry() //Add cloudfoundry environment variables as a configuration source
                  .ConfigureAppConfiguration((hostingContext, config) =>
                  {
@@ -38,6 +31,8 @@ namespace FortuneTeller.Service
 
                      config
                          .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                         .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
+                         .AddConfigServer()
                          .AddEnvironmentVariables();
 
                      if (args != null)
@@ -45,7 +40,6 @@ namespace FortuneTeller.Service
                          config.AddCommandLine(args);
                      }
                  })
-                 .AddConfigServer()
                  .UseStartup<Startup>();
             builder.ConfigureLogging((hostingContext, loggingBuilder) =>
             {

@@ -35,6 +35,18 @@
     <Content Remove="appsettings %28copy%29.Development.json" />
     <Content Remove="appsettings %28copy%29.json" />
     <Content Remove="publish\publish\wwwroot\lib\bootstrap\.bower.json" />
+    <Content Remove="publish\wwwroot\lib\jquery-validation\.bower.json" />
+    <Content Remove="publish\wwwroot\lib\jquery\.bower.json" />
+    <Content Remove="publish\appsettings.json" />
+    <Content Remove="publish\appsettings.Development.json" />
+    <Content Remove="publish\appsettings.Production.json" />
+    <Content Remove="publish\FortuneTeller.UI.deps.json" />
+    <Content Remove="publish\FortuneTeller.UI.runtimeconfig.json" />
+    <Content Remove="publish\publish\wwwroot\lib\bootstrap\.bower.json" />
+    <Content Remove="appsettings %28copy%29.Development.json" />
+    <Content Remove="appsettings %28copy%29.json" />
+    <Content Remove="appsettings %28another copy%29.Development.json" />
+    <Content Remove="appsettings %28another copy%29.Development.json" />
   </ItemGroup>
   <ItemGroup>
     <None Update="manifest-linux.yml">
