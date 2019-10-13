@@ -5,6 +5,7 @@ applications:
   buildpack: dotnet_core_buildpack 
   services:
       - config-server 
+      - service-registry
   env:
     ASPNETCORE_ENVIRONMENT: Production
     
