@@ -39,7 +39,7 @@ namespace FortuneTeller.Service
                      config
                          .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                          .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
-                         .AddConfigServer()
+                         .AddConfigServer(env)
                          .AddEnvironmentVariables();
 
                      if (args != null)

@@ -17,6 +17,7 @@
     <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="2.2.1" />
     <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="2.2.0" />
     <PackageReference Include="Steeltoe.Extensions.Configuration.ConfigServerCore" Version="2.2.0" />
+    <PackageReference Include="Steeltoe.Discovery.ClientCore" Version="2.3.0" />
   </ItemGroup>
 
   <ItemGroup>
