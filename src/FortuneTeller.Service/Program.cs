@@ -13,9 +13,16 @@ namespace FortuneTeller.Service
 {
     public class Program
     {
-        public static void  Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            var host = CreateWebHostBuilder(args).Build();
+
+            using (var scope = host.Services.CreateScope())
+            {
+                await SampleData.InitializeFortunesAsync(scope.ServiceProvider);
+            }
+
+            host.Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args)
