@@ -47,6 +47,7 @@ namespace FortuneTeller.UI
                 .PersistKeysToRedis()
                 .SetApplicationName("fortuneui");
             services.AddHystrixCommand<FortuneServiceCommand>("fortuneService", Configuration);
+            services.AddHystrixMetricsStream(Configuration);
 
             services.AddSession();
            
@@ -72,6 +73,7 @@ namespace FortuneTeller.UI
             app.UseCookiePolicy();
             app.UseDiscoveryClient();
             app.UseHystrixRequestContext();
+            app.UseHystrixMetricsStream();
             app.UseMvc();
         }
     }
