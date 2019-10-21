@@ -10,5 +10,6 @@ namespace FortuneTeller.Service.Models
 
         }
         public DbSet<FortuneEntity> Fortunes { get; set; }
+
     }
 }

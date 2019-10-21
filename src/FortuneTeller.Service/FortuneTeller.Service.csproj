@@ -18,6 +18,9 @@
     <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="2.2.0" />
     <PackageReference Include="Steeltoe.Extensions.Configuration.ConfigServerCore" Version="2.2.0" />
     <PackageReference Include="Steeltoe.Discovery.ClientCore" Version="2.3.0" />
+    <PackageReference Include="Steeltoe.CloudFoundry.Connector.EFCore" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.1.11" />
+    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.18" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +30,10 @@
   <ItemGroup>
     <Content Remove="publish\publish\publish\publish\FortuneTeller.Service.deps.json" />
     <Content Remove="publish\publish\publish\publish\FortuneTeller.Service.runtimeconfig.json" />
+    <Content Remove="publish\FortuneTeller.Service.runtimeconfig.json" />
+    <Content Remove="publish\publish\appsettings.Production.json" />
+    <Content Remove="publish\publish\FortuneTeller.Service.deps.json" />
+    <Content Remove="publish\publish\web.config" />
   </ItemGroup>
   <ItemGroup>
     <None Update="manifest-linux.yml">

@@ -1,12 +1,16 @@
 using FortuneTeller.UI.Services;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Steeltoe.CircuitBreaker.Hystrix;
+using Steeltoe.CloudFoundry.Connector.Redis;
 using Steeltoe.Common.Http.Discovery;
 using Steeltoe.Discovery.Client;
+using Steeltoe.Security.DataProtection;
 
 namespace FortuneTeller.UI
 {
@@ -36,7 +40,14 @@ namespace FortuneTeller.UI
             services.AddScoped<IFortuneService, FortuneServiceClient>();
             services.AddHttpClient<IFortuneService, FortuneServiceClient>()
                 .AddHttpMessageHandler<DiscoveryHttpMessageHandler>();
-            services.AddDistributedMemoryCache();
+            //  services.AddDistributedMemoryCache();
+            services.AddDistributedRedisCache(Configuration);
+            services.AddRedisConnectionMultiplexer(Configuration);
+            services.AddDataProtection()
+                .PersistKeysToRedis()
+                .SetApplicationName("fortuneui");
+            services.AddHystrixCommand<FortuneServiceCommand>("fortuneService", Configuration);
+
             services.AddSession();
            
             services
@@ -60,6 +71,7 @@ namespace FortuneTeller.UI
             app.UseSession();
             app.UseCookiePolicy();
             app.UseDiscoveryClient();
+            app.UseHystrixRequestContext();
             app.UseMvc();
         }
     }
